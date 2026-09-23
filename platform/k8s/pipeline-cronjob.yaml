@@ -1,0 +1,62 @@
+# The pipeline's natural production shape: scheduled batch ingest + always-on query API.
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: ticket-ingest
+  namespace: ml-platform
+spec:
+  schedule: "0 5 * * *"          # daily, 05:00 UTC (06:00 Lagos)
+  concurrencyPolicy: Forbid      # never two ingests racing one SQLite file
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: 1
+      template:
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: ingest
+              image: ECR_REGISTRY/ticket-pipeline:IMAGE_TAG
+              command: ["python", "-m", "pipeline.ingest"]
+              resources:
+                requests: { cpu: 100m, memory: 256Mi }
+                limits:   { cpu: "1",  memory: 512Mi }
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ticket-api
+  namespace: ml-platform
+  labels: { app: ticket-api }
+spec:
+  replicas: 1
+  selector:
+    matchLabels: { app: ticket-api }
+  template:
+    metadata:
+      labels: { app: ticket-api }
+    spec:
+      containers:
+        - name: ticket-api
+          image: ECR_REGISTRY/ticket-pipeline:IMAGE_TAG
+          ports:
+            - name: http
+              containerPort: 8000
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits:   { cpu: 500m, memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ticket-api
+  namespace: ml-platform
+spec:
+  selector: { app: ticket-api }
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

@@ -1,0 +1,29 @@
+{
+  "description": "Hand-written eval set over the solar corpus. 'expect_keyphrases' = ANY match counts as correct answer content. 'expected_doc' = doc that must appear in retrieval. 'answerable' = false means correct behavior is abstention.",
+  "cases": [
+    {"id": "q01", "query": "How many peak sun hours does Lagos average per day?", "expected_doc": "01_panel_sizing", "expect_keyphrases": ["4.5", "5.0"], "answerable": true, "tags": ["direct"]},
+    {"id": "q02", "query": "What system efficiency should I assume for an MPPT hybrid system?", "expected_doc": "01_panel_sizing", "expect_keyphrases": ["0.75", "0.80", "75", "80"], "answerable": true, "tags": ["direct"]},
+    {"id": "q03", "query": "How much output do crystalline panels lose per degree above 25 C?", "expected_doc": "01_panel_sizing", "expect_keyphrases": ["0.35"], "answerable": true, "tags": ["direct"]},
+    {"id": "q04", "query": "What tilt angle should I use for panels in Lagos?", "expected_doc": "01_panel_sizing", "expect_keyphrases": ["10-15", "10 to 15"], "answerable": true, "tags": ["direct"]},
+    {"id": "q05", "query": "How much continuous AC power does a 5.5 kVA hybrid inverter deliver?", "expected_doc": "02_hybrid_inverters", "expect_keyphrases": ["5,000", "5000"], "answerable": true, "tags": ["direct"]},
+    {"id": "q06", "query": "What does an F07 overload fault during compressor start mean?", "expected_doc": "02_hybrid_inverters", "expect_keyphrases": ["surge", "5-second"], "answerable": true, "tags": ["direct"]},
+    {"id": "q07", "query": "Is PV overpaneling harmful to a hybrid inverter?", "expected_doc": "02_hybrid_inverters", "expect_keyphrases": ["not harmful", "clip"], "answerable": true, "tags": ["direct"]},
+    {"id": "q08", "query": "What is SBU priority mode?", "expected_doc": "02_hybrid_inverters", "expect_keyphrases": ["solar first", "battery second", "Solar-Battery-Utility"], "answerable": true, "tags": ["direct"]},
+    {"id": "q09", "query": "How many cycles does a LiFePO4 battery last compared to lead-acid?", "expected_doc": "03_lifepo4_batteries", "expect_keyphrases": ["4,000-6,000", "4,000", "400-600"], "answerable": true, "tags": ["comparison"]},
+    {"id": "q10", "query": "What bulk charge voltage should I set for a 48V LiFePO4 bank?", "expected_doc": "03_lifepo4_batteries", "expect_keyphrases": ["55.2", "56.0"], "answerable": true, "tags": ["direct"]},
+    {"id": "q11", "query": "How much usable energy does an 18 kWh LiFePO4 bank provide?", "expected_doc": "03_lifepo4_batteries", "expect_keyphrases": ["16.2"], "answerable": true, "tags": ["direct"]},
+    {"id": "q12", "query": "Why is voltage a bad way to estimate state of charge on lithium batteries?", "expected_doc": "03_lifepo4_batteries", "expect_keyphrases": ["flat", "20 and 90"], "answerable": true, "tags": ["paraphrase"]},
+    {"id": "q13", "query": "How much energy does an inverter AC save compared to a fixed-speed unit overnight?", "expected_doc": "04_load_management", "expect_keyphrases": ["40-55", "3-4.5"], "answerable": true, "tags": ["comparison"]},
+    {"id": "q14", "query": "What is the single best upgrade for a solar home to reduce battery drain?", "expected_doc": "04_load_management", "expect_keyphrases": ["inverter AC", "highest-leverage"], "answerable": true, "tags": ["paraphrase"]},
+    {"id": "q15", "query": "What size fuse should protect the battery cable for a 5 kW inverter at 48 V?", "expected_doc": "05_wiring_protection", "expect_keyphrases": ["150 A", "Class T"], "answerable": true, "tags": ["direct"]},
+    {"id": "q16", "query": "Are cheap DC-labeled MCBs safe for breaking battery fault current?", "expected_doc": "05_wiring_protection", "expect_keyphrases": ["cannot safely break", "AC breakers relabeled"], "answerable": true, "tags": ["direct"]},
+    {"id": "q17", "query": "Why does my hybrid inverter keep rejecting my petrol generator?", "expected_doc": "06_generator_integration", "expect_keyphrases": ["frequency", "sag", "49.5-50.5"], "answerable": true, "tags": ["diagnostic", "paraphrase"]},
+    {"id": "q18", "query": "How big a generator do I need to charge at 80 A while running 1.5 kW of loads?", "expected_doc": "06_generator_integration", "expect_keyphrases": ["6 kW"], "answerable": true, "tags": ["direct"]},
+    {"id": "q19", "query": "How much does petrol generation cost per kWh in Nigeria versus solar?", "expected_doc": "06_generator_integration", "expect_keyphrases": ["350-500", "80-150"], "answerable": true, "tags": ["comparison"]},
+    {"id": "q20", "query": "How often should panels be cleaned during harmattan and why?", "expected_doc": "07_monitoring_maintenance", "expect_keyphrases": ["15-25 percent", "3-4 weeks"], "answerable": true, "tags": ["direct"]},
+    {"id": "q21", "query": "My daily solar yield has dropped 10 percent for two weeks, what should I suspect?", "expected_doc": "07_monitoring_maintenance", "expect_keyphrases": ["soiling", "failed string"], "answerable": true, "tags": ["diagnostic", "paraphrase"]},
+    {"id": "q22", "query": "What fraction of total system cost is the battery bank?", "expected_doc": "08_economics_payback", "expect_keyphrases": ["40-45"], "answerable": true, "tags": ["direct"]},
+    {"id": "q23", "query": "Which component should I buy last if staging purchases and why?", "expected_doc": "08_economics_payback", "expect_keyphrases": ["battery last", "decline"], "answerable": true, "tags": ["paraphrase"]},
+    {"id": "q24", "query": "What is the warranty period on a Deye 5.5 kVA inverter?", "expected_doc": null, "expect_keyphrases": [], "answerable": false, "tags": ["unanswerable"]}
+  ]
+}

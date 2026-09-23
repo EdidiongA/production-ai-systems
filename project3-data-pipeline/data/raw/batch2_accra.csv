@@ -1,0 +1,41 @@
+id,date_opened,location,type,urgency,cost,currency,state,title
+ACC-2001,2026-03-05,Accra,network,3,2643,USD,pending,Wi-Fi drops in conference room
+ACC-2002,2026-06-11,accra,network,1,3830,USD,pending,Switch port dead on floor 2
+ACC-2003,"Jun 27, 2026",Accra Office,printer,2,2705,USD,resolved,Cannot connect to VPN
+ACC-2004,"Jun 6, 2026",accra,printer,normal,1418,GHS,pending,Domain controller replication alert
+ACC-2005,"Apr 28, 2026",accra,hardware,1,2656,GHS,open,Excel file corrupt
+ACC-2006,"Mar 11, 2026",Accra,other,4,2601,GHS,resolved,Printer offline in finance
+ACC-2007,"Feb 18, 2026",Accra,software,3,3912,GHS,pending,Laptop screen flickering
+ACC-2008,"Feb 23, 2026",Accra,printer,4,2839,GHS,closed,Printer offline in finance
+ACC-2009,2026-04-02,Accra Office,email,critical,3914,GHS,pending,Excel file corrupt
+ACC-2010,"Mar 12, 2026",Accra Office,access,3,1389,GHS,resolved,Cannot connect to VPN
+ACC-2011,"Feb 1, 2026",accra,network,4,1170,GHS,pending,Outlook not syncing
+ACC-2012,2026-01-27,Accra,email,normal,2134,GHS,resolved,Sage Evolution login failure
+ACC-2013,"May 17, 2026",accra,access,3,1524,USD,closed,Printer offline in finance
+ACC-2014,"Feb 25, 2026",Accra Office,printer,4,3840,GHS,closed,Cannot connect to VPN
+ACC-2015,2026-02-14,Accra Office,software,critical,3577,USD,resolved,Phishing email reported
+ACC-2016,"Apr 5, 2026",Accra Office,other,3,2715,USD,pending,New starter account setup
+ACC-2017,"May 7, 2026",Accra Office,printer,normal,3034,GHS,closed,Password reset needed
+ACC-2018,"Jun 19, 2026",Accra Office,other,1,1276,GHS,closed,Password reset needed
+ACC-2019,2026-05-23,Accra,access,2,269,GHS,closed,Excel file corrupt
+ACC-2020,2026-06-20,Accra Office,hardware,3,1541,GHS,open,Sage Evolution login failure
+ACC-2021,"Apr 5, 2026",Accra,email,critical,n/a,GHS,open,Cannot connect to VPN
+ACC-2022,2026-05-28,Accra Office,other,3,165,USD,closed,New starter account setup
+ACC-2023,2026-01-14,accra,software,2,2760,USD,pending,Laptop screen flickering
+ACC-2024,2026-05-28,Accra Office,access,4,2937,GHS,closed,Outlook not syncing
+ACC-2025,"Apr 18, 2026",accra,hardware,2,524,USD,open,Shared drive access denied
+ACC-2026,"May 23, 2026",Accra,software,2,825,GHS,pending,Cannot connect to VPN
+ACC-2027,"Feb 21, 2026",accra,network,normal,89,USD,pending,New starter account setup
+ACC-2028,2026-03-27,accra,software,1,2342,GHS,closed,Shared drive access denied
+ACC-2029,2026-05-21,Accra,email,normal,3142,USD,resolved,Excel file corrupt
+ACC-2030,2026-04-12,Accra Office,other,critical,3382,USD,resolved,Outlook not syncing
+ACC-2031,2026-05-02,Accra Office,access,critical,3323,GHS,pending,UPS beeping in server room
+ACC-2032,2026-01-05,Accra,hardware,1,738,GHS,resolved,Cannot connect to VPN
+ACC-2033,"Jun 3, 2026",Accra Office,hardware,normal,3757,USD,resolved,Projector HDMI no signal
+ACC-2034,2026-04-08,Accra Office,access,normal,1026,GHS,resolved,Wi-Fi drops in conference room
+ACC-2035,2026-02-20,accra,software,1,2468,GHS,pending,Sage Evolution login failure
+ACC-2036,"Apr 7, 2026",Accra Office,hardware,critical,624,GHS,resolved,Laptop screen flickering
+ACC-2037,"Mar 9, 2026",Accra Office,printer,1,3611,GHS,closed,New starter account setup
+ACC-2038,2026-03-26,Accra Office,hardware,critical,1710,GHS,open,Phishing email reported
+ACC-2039,2026-04-13,Accra,software,1,3328,GHS,closed,New starter account setup
+ACC-2040,2026-03-03,Accra,hardware,2,2634,GHS,open,Switch port dead on floor 2

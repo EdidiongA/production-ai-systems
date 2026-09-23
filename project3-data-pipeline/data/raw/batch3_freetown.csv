@@ -1,0 +1,33 @@
+ticket_id,opened,office,category,priority,cost_ngn,status,subject
+FNA-3001,04-18-2026,,hardware,P3,46100,in_progress,Domain controller replication alert
+FNA-3002,05-21-2026,Freetown,software,P4,3400,closed,Printer offline in finance
+FNA-3003,02-21-2026,Freetown,network,P2,1300,closed,UPS beeping in server room
+FNA-3004,06-02-2026,freetown,network,P1,46300,resolvd,New starter account setup
+FNA-3005,2026-02-30,Freetown,printer,P2,26300,open,New starter account setup
+FNA-3006,03-08-2026,,access,P4,5400,resolvd,Cannot connect to VPN
+FNA-3007,01-14-2026,freetown,printer,P1,23500,resolvd,Password reset needed
+FNA-3008,02-06-2026,Freetown,software,P3,-45000,closed,Excel file corrupt
+FNA-3009,06-06-2026,freetown,hardware,P1,18600,open,Projector HDMI no signal
+FNA-3010,02-19-2026,,software,P4,45500,resolvd,Excel file corrupt
+
+FNA-3005,03-06-2026,Freetown,printer,P1,8100,open,Domain controller replication alert
+FNA-3012,04-03-2026,,access,P4,35300,closed,New starter account setup
+LAG-1010,03-03-2026,Freetown,email,P1,34200,closed,Laptop screen flickering
+FNA-3014,01-13-2026,Freetown,network,P2,16700,open,Cannot connect to VPN
+FNA-3015,03-24-2026,Freetown,email,P4,31200,open,Laptop screen flickering
+,06-16-2026,Freetown,printer,P4,6700,open,Password reset needed
+FNA-3017,01-20-2026,,network,P2,21800,closed,Cannot connect to VPN
+FNA-3018,04-20-2026,freetown,software,P4,33400,open,Sage Evolution login failure
+FNA-3019,05-04-2026,Freetown,software,P3,23700,open,CafÃ© kiosk rÃ©seau down
+FNA-3020,04-09-2026,freetown,access,P3,13800,in_progress,Projector HDMI no signal
+
+FNA-3021,05-14-2026,freetown,network,P3,42800,resolvd,Printer offline in finance
+FNA-3022,,Freetown,software,P2,36700,closed,Projector HDMI no signal
+FNA-3023,04-08-2026,,email,P3,9400,open,Laptop screen flickering
+FNA-3024,04-05-2026,,network,P4,11600,closed,Switch port dead on floor 2
+FNA-3025,05-18-2026,freetown,email,P3,18700,in_progress,Laptop screen flickering
+FNA-3026,02-17-2026,freetown,hardware,P2,16300,resolvd,Domain controller replication alert
+FNA-3027,04-22-2026,,software,P4,20200,in_progress,Excel file corrupt
+FNA-3028,01-20-2026,freetown,email,P1,41900,closed,New starter account setup
+FNA-3029,03-27-2026,freetown,software,P3,42000,closed,Domain controller replication alert
+FNA-3030,03-25-2026,freetown,printer,P2,1600,in_progress,New starter account setup

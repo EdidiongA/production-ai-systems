@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ticket Pipeline — Quality Dashboard</title>
+<style>
+  :root{--bg:#0f1419;--panel:#1a2129;--border:#2d3742;--text:#e6edf3;--muted:#8b98a5;
+        --accent:#56d4a0;--warn:#d29922;--err:#f85149;--radius:10px}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 16px}
+  header h1{font-size:1.25rem;margin:0 0 2px}
+  header p{color:var(--muted);margin:0 0 20px;font-size:.9rem}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+  .row{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  input[type=search]{flex:1 1 260px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);font-size:15px}
+  input:focus{outline:2px solid var(--accent);outline-offset:1px}
+  button{padding:10px 18px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);
+    color:#06231a;font-weight:600;cursor:pointer;font-size:15px}
+  button.ghost{background:transparent;color:var(--accent)}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+  .muted{color:var(--muted);font-size:.85rem}
+  .empty{color:var(--muted);text-align:center;padding:28px 8px}
+  .error{color:var(--err)}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:8px}
+  .metric b{display:block;font-size:1.15rem}
+  .metric span{color:var(--muted);font-size:.78rem}
+  .qbar{height:8px;background:var(--border);border-radius:4px;overflow:hidden;margin:6px 0 4px}
+  .qbar>div{height:100%;background:var(--accent)}
+  table{width:100%;border-collapse:collapse;font-size:.85rem;margin-top:10px}
+  th,td{text-align:left;padding:7px 8px;border-bottom:1px solid var(--border)}
+  th{color:var(--muted);font-weight:600}
+  .chip{display:inline-block;background:rgba(210,153,34,.12);color:var(--warn);border-radius:999px;
+    padding:1px 9px;font-size:.75rem;margin:2px 3px 0 0}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--muted);
+    border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-3px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.spinner{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Ticket Pipeline — Quality Dashboard</h1>
+    <p>Ingest quality over time, rejection reasons, and retrieval over the validated ticket store.</p>
+  </header>
+
+  <section class="card" aria-live="polite" aria-labelledby="q-h">
+    <div class="row" style="justify-content:space-between">
+      <h2 id="q-h" class="muted" style="margin:0">Latest ingest quality</h2>
+      <button id="ingest-btn" class="ghost" type="button">Re-run ingest</button>
+    </div>
+    <div id="quality"><p class="empty">Loading…</p></div>
+  </section>
+
+  <section class="card" aria-labelledby="s-h">
+    <h2 id="s-h" class="muted" style="margin-top:0">Search validated tickets</h2>
+    <form id="search-form" class="row">
+      <input id="q" type="search" required minlength="2" maxlength="200"
+             placeholder="e.g. printer offline, VPN Accra, password reset" aria-label="Ticket search query">
+      <button id="search-btn" type="submit">Search</button>
+    </form>
+    <div id="results" aria-live="polite"><p class="empty">No search yet.</p></div>
+  </section>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = t => String(t ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadQuality(){
+  const box = $('#quality');
+  try{
+    const r = await fetch('/quality');
+    if(r.status === 404){ box.innerHTML = '<p class="empty">No ingest runs yet — click "Re-run ingest".</p>'; return; }
+    if(!r.ok) throw 0;
+    const runs = await r.json(), m = runs[0];
+    const reasons = Object.entries(m.reject_reasons)
+      .map(([k,v]) => `<span class="chip">${esc(k)} × ${v}</span>`).join('') || '<span class="muted">none</span>';
+    box.innerHTML = `
+      <div class="metrics">
+        <div class="metric"><b>${m.raw_rows}</b><span>raw rows</span></div>
+        <div class="metric"><b>${m.accepted}</b><span>accepted</span></div>
+        <div class="metric"><b>${m.rejected}</b><span>rejected (logged)</span></div>
+        <div class="metric"><b>${m.transformed_fields}</b><span>field transforms</span></div>
+      </div>
+      <div class="muted">Quality score ${(m.quality_score*100).toFixed(1)}% · run ${esc(m.run_id)} · ${esc(m.ts)}</div>
+      <div class="qbar" role="img" aria-label="Quality score ${(m.quality_score*100).toFixed(1)} percent">
+        <div style="width:${m.quality_score*100}%"></div></div>
+      <div>${reasons}</div>
+      ${runs.length > 1 ? `<p class="muted" style="margin-bottom:0">History: ${runs.slice(0,8)
+        .map(x => (x.quality_score*100).toFixed(0)+'%').join(' → ')}</p>` : ''}`;
+  }catch{ box.innerHTML = '<p class="empty error">Quality endpoint unavailable.</p>'; }
+}
+
+$('#ingest-btn').addEventListener('click', async () => {
+  const b = $('#ingest-btn'); b.disabled = true; b.textContent = 'Ingesting…';
+  try{ await fetch('/ingest', {method:'POST'}); await loadQuality(); }
+  finally{ b.disabled = false; b.textContent = 'Re-run ingest'; }
+});
+
+$('#search-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const out = $('#results'), btn = $('#search-btn');
+  btn.disabled = true;
+  out.innerHTML = '<p><span class="spinner" role="status" aria-label="Loading"></span> Searching…</p>';
+  try{
+    const r = await fetch('/query?q=' + encodeURIComponent($('#q').value));
+    if(!r.ok){ out.innerHTML = `<p class="error">Search failed (${r.status}).</p>`; return; }
+    const d = await r.json();
+    out.innerHTML = d.results.length
+      ? `<table aria-label="Search results"><thead><tr>
+           <th>Ticket</th><th>Subject</th><th>Office</th><th>Priority</th><th>Status</th><th>Cost USD</th>
+         </tr></thead><tbody>${d.results.map(t => `<tr>
+           <td>${esc(t.ticket_id)}</td><td>${esc(t.subject)}</td><td>${esc(t.office)}</td>
+           <td>${esc(t.priority)}</td><td>${esc(t.status)}</td><td>${t.cost_usd}</td></tr>`).join('')}
+         </tbody></table>`
+      : '<p class="empty">No matching tickets — try broader terms.</p>';
+  }catch{ out.innerHTML = '<p class="error">Network error — is the service running?</p>'; }
+  finally{ btn.disabled = false; }
+});
+loadQuality();
+</script>
+</body>
+</html>

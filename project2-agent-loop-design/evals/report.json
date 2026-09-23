@@ -1,0 +1,148 @@
+{
+  "summary": {
+    "model": "mock-policy-v1",
+    "tasks": 10,
+    "passed": 10,
+    "pass_rate": 1.0,
+    "avg_steps": 3,
+    "avg_tokens_per_task": 992,
+    "total_est_cost_usd": 0.0,
+    "failure_injection_tasks": [
+      "t08",
+      "t09",
+      "t10"
+    ]
+  },
+  "results": [
+    {
+      "id": "t01",
+      "goal": "List active assets with warranty due on or before 2026-09-30 and the total renew",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 3,
+      "tokens": 1068,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Computed to",
+      "run_id": "e0e977f9f7e9"
+    },
+    {
+      "id": "t02",
+      "goal": "What is the total renewal cost in USD for warranties due on or before 2026-08-31",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 6,
+      "tokens": 2503,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 1,
+      "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Total renew",
+      "run_id": "f376ee60668f"
+    },
+    {
+      "id": "t03",
+      "goal": "Who can approve a hardware warranty renewal above the cost threshold, according ",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 2,
+      "tokens": 552,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Policy: [procurement_policy] Hardware warranty renewals above 5,000 USD require Head of IT approval and two vendor quotes. Renewals at or below 5,000 USD can be approved by the inf",
+      "run_id": "d3881faf144b"
+    },
+    {
+      "id": "t04",
+      "goal": "Count active assets by location.",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 2,
+      "tokens": 514,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Counts by location: [{'location': 'Lagos', 'n': 6}, {'location': 'Accra', 'n': 2}, {'location': 'Freetown', 'n': 1}, {'location': 'Banjul', 'n': 1}]",
+      "run_id": "8315646a1a16"
+    },
+    {
+      "id": "t05",
+      "goal": "Which assets have an unsupported OS and must be flagged per security policy?",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 3,
+      "tokens": 920,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Unsupported-OS assets (critical finding per security policy): [{'hostname': 'acc-app-01', 'os': 'Windows Server 2012', 'location': 'Accra'}] Policy: [procurement_policy] Hardware w",
+      "run_id": "1749961216d1"
+    },
+    {
+      "id": "t06",
+      "goal": "What is the FY2026 renewal budget in the budget file?",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 2,
+      "tokens": 450,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "FY2026 renewal budget: 25000 USD.",
+      "run_id": "684b6fe17e56"
+    },
+    {
+      "id": "t07",
+      "goal": "For warranties due on or before 2026-09-30, is the total renewal cost within the",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 5,
+      "tokens": 2266,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Computed to",
+      "run_id": "9ec03b07231d"
+    },
+    {
+      "id": "t08",
+      "goal": "Convert 1000 USD to XOF.",
+      "status": "tool_error_streak",
+      "expected_status": "tool_error_streak",
+      "passed": true,
+      "steps": 3,
+      "tokens": 653,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 3,
+      "answer": "",
+      "run_id": "d054c2b19b51"
+    },
+    {
+      "id": "t09",
+      "goal": "[chaos:malformed] Count active assets by location.",
+      "status": "completed",
+      "expected_status": "completed",
+      "passed": true,
+      "steps": 3,
+      "tokens": 758,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "Counts by location: [{'location': 'Lagos', 'n': 6}, {'location': 'Accra', 'n': 2}, {'location': 'Freetown', 'n': 1}, {'location': 'Banjul', 'n': 1}]",
+      "run_id": "cf5787ee17c3"
+    },
+    {
+      "id": "t10",
+      "goal": "List active assets with warranty due on or before 2026-09-30 and the total renew",
+      "status": "budget_exceeded",
+      "expected_status": "budget_exceeded",
+      "passed": true,
+      "steps": 1,
+      "tokens": 240,
+      "est_cost_usd": 0.0,
+      "tool_errors_survived": 0,
+      "answer": "",
+      "run_id": "3c55ba4ad50a"
+    }
+  ]
+}

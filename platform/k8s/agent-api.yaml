@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: asset-agent
+  namespace: ml-platform
+  labels: { app: asset-agent }
+spec:
+  replicas: 1        # agent runs are stateful-per-request; scale via queue, not replicas (DEPLOYMENT.md)
+  selector:
+    matchLabels: { app: asset-agent }
+  template:
+    metadata:
+      labels: { app: asset-agent }
+    spec:
+      containers:
+        - name: asset-agent
+          image: ECR_REGISTRY/asset-agent:IMAGE_TAG
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef: { name: anthropic, key: api-key, optional: true }
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits:   { cpu: 500m, memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+          livenessProbe:
+            httpGet: { path: /health, port: http }
+            initialDelaySeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: asset-agent
+  namespace: ml-platform
+spec:
+  selector: { app: asset-agent }
+  ports:
+    - name: http
+      port: 80
+      targetPort: http

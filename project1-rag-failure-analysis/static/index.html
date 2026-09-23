@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Solar RAG — Query Console</title>
+<style>
+  :root{--bg:#0f1419;--panel:#1a2129;--border:#2d3742;--text:#e6edf3;--muted:#8b98a5;
+        --accent:#4da3ff;--ok:#3fb950;--warn:#d29922;--err:#f85149;--radius:10px}
+  *{box-sizing:border-box}
+  body{margin:0;font:15px/1.55 system-ui,-apple-system,Segoe UI,sans-serif;background:var(--bg);color:var(--text)}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 16px}
+  header h1{font-size:1.25rem;margin:0 0 2px}
+  header p{color:var(--muted);margin:0 0 20px;font-size:.9rem}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin-bottom:16px}
+  form{display:flex;gap:8px;flex-wrap:wrap}
+  input[type=text]{flex:1 1 280px;padding:10px 12px;border-radius:8px;border:1px solid var(--border);
+    background:var(--bg);color:var(--text);font-size:15px}
+  input[type=text]:focus{outline:2px solid var(--accent);outline-offset:1px}
+  button{padding:10px 18px;border-radius:8px;border:1px solid var(--accent);background:var(--accent);
+    color:#04101f;font-weight:600;cursor:pointer;font-size:15px}
+  button:disabled{opacity:.5;cursor:not-allowed}
+  button:focus-visible{outline:2px solid var(--text);outline-offset:2px}
+  .badge{display:inline-block;padding:2px 10px;border-radius:999px;font-size:.78rem;font-weight:600}
+  .badge.ok{background:rgba(63,185,80,.15);color:var(--ok)}
+  .badge.warn{background:rgba(210,153,34,.15);color:var(--warn)}
+  .muted{color:var(--muted);font-size:.85rem}
+  .empty{color:var(--muted);text-align:center;padding:28px 8px}
+  .error{color:var(--err)}
+  ul.cites{margin:8px 0 0;padding-left:18px}
+  ul.cites li{font-family:ui-monospace,monospace;font-size:.82rem;color:var(--muted)}
+  .metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px}
+  .metric b{display:block;font-size:1.15rem}
+  .metric span{color:var(--muted);font-size:.78rem}
+  .spinner{display:inline-block;width:16px;height:16px;border:2px solid var(--muted);
+    border-top-color:var(--accent);border-radius:50%;animation:spin .8s linear infinite;vertical-align:-3px}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.spinner{animation:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Solar RAG — Query Console</h1>
+    <p>Ask a question about the home solar corpus. Answers are schema-validated and citation-guarded.</p>
+  </header>
+
+  <section class="card" aria-labelledby="ask-h">
+    <h2 id="ask-h" class="muted" style="margin-top:0">Ask</h2>
+    <form id="ask-form">
+      <input id="q" type="text" required minlength="3" maxlength="500"
+             placeholder="e.g. What fuse should protect the battery bank?"
+             aria-label="Question for the RAG system">
+      <button id="ask-btn" type="submit">Ask</button>
+    </form>
+  </section>
+
+  <section class="card" aria-live="polite" aria-labelledby="ans-h">
+    <h2 id="ans-h" class="muted" style="margin-top:0">Answer</h2>
+    <div id="answer"><p class="empty">No question asked yet — results appear here.</p></div>
+  </section>
+
+  <section class="card" aria-labelledby="met-h">
+    <h2 id="met-h" class="muted" style="margin-top:0">Service metrics</h2>
+    <div id="metrics" class="metrics"><p class="empty">Loading…</p></div>
+  </section>
+</div>
+
+<script>
+const $ = s => document.querySelector(s);
+const esc = t => t.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+async function loadMetrics(){
+  try{
+    const r = await fetch('/metrics'); if(!r.ok) throw 0;
+    const m = await r.json();
+    $('#metrics').innerHTML = [
+      ['Requests', m.requests],
+      ['Abstention rate', m.abstention_rate],
+      ['Avg latency', m.avg_latency_ms + ' ms'],
+      ['p95 latency', m.p95_latency_ms + ' ms'],
+      ['Cost / 1k req', '$' + m.est_cost_per_1000_requests_usd],
+    ].map(([k,v]) => `<div class="metric"><b>${esc(String(v))}</b><span>${k}</span></div>`).join('');
+  }catch{ $('#metrics').innerHTML = '<p class="empty error">Metrics unavailable.</p>'; }
+}
+
+$('#ask-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const btn = $('#ask-btn'), out = $('#answer');
+  btn.disabled = true;
+  out.innerHTML = '<p><span class="spinner" role="status" aria-label="Loading"></span> Retrieving and generating…</p>';
+  try{
+    const r = await fetch('/ask', {method:'POST', headers:{'Content-Type':'application/json'},
+                                   body: JSON.stringify({query: $('#q').value})});
+    if(r.status === 429){ out.innerHTML = '<p class="error">Rate limit exceeded — wait a minute and retry.</p>'; return; }
+    if(!r.ok){ const d = await r.json().catch(()=>({})); out.innerHTML =
+      `<p class="error">Request failed (${r.status}): ${esc(d.detail || 'unknown error')}</p>`; return; }
+    const d = await r.json(), a = d.result;
+    out.innerHTML = a.abstained
+      ? `<span class="badge warn">abstained</span>
+         <p>${esc(a.answer || 'The system declined to answer: the retrieved context does not cover this question.')}</p>`
+      : `<span class="badge ok">answered</span>
+         <span class="muted"> confidence ${a.confidence} · ${d.latency_ms} ms · ~$${d.est_cost_usd}</span>
+         <p>${esc(a.answer)}</p>
+         <div class="muted">Citations (retrieved chunks only):</div>
+         <ul class="cites">${a.citations.map(c=>`<li>${esc(c)}</li>`).join('') || '<li>none</li>'}</ul>`;
+  }catch{ out.innerHTML = '<p class="error">Network error — is the service running?</p>'; }
+  finally{ btn.disabled = false; loadMetrics(); }
+});
+loadMetrics();
+</script>
+</body>
+</html>

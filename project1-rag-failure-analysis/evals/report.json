@@ -1,0 +1,517 @@
+{
+  "summary": {
+    "model": "mock-extractive-v1",
+    "n_cases": 24,
+    "accuracy": 0.792,
+    "outcome_counts": {
+      "correct": 18,
+      "correct_abstention": 1,
+      "generation_failure": 5
+    },
+    "retrieval_hit_rate": 1.0,
+    "avg_latency_ms": 0.24,
+    "p95_latency_ms": 0.28,
+    "avg_input_tokens": 325,
+    "avg_output_tokens": 62,
+    "total_cost_usd": 0.0,
+    "est_cost_per_1000_queries_usd": 0.0
+  },
+  "cases": [
+    {
+      "id": "q01",
+      "query": "How many peak sun hours does Lagos average per day?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Lagos, Nigeria averages 4.5 to 5.0 peak sun hours per day across the year, with the July-September rainy season dropping effective PSH to around 3.5.",
+      "citations": [
+        "01_panel_sizing#p0"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "01_panel_sizing#p0",
+        "08_economics_payback#p3",
+        "07_monitoring_maintenance#p3",
+        "01_panel_sizing#p2"
+      ],
+      "expected_doc": "01_panel_sizing",
+      "latency_ms": 0.66
+    },
+    {
+      "id": "q02",
+      "query": "What system efficiency should I assume for an MPPT hybrid system?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "A realistic end-to-end system efficiency for an MPPT-based hybrid system is 0.75 to 0.80 after accounting for temperature derating, wiring losses, inverter conversion loss, and battery round-trip loss.",
+      "citations": [
+        "01_panel_sizing#p1"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "01_panel_sizing#p1",
+        "08_economics_payback#p0",
+        "08_economics_payback#p2",
+        "08_economics_payback#p1"
+      ],
+      "expected_doc": "01_panel_sizing",
+      "latency_ms": 0.28
+    },
+    {
+      "id": "q03",
+      "query": "How much output do crystalline panels lose per degree above 25 C?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Panel temperature derating matters in tropical climates: crystalline panels lose about 0.35 percent of output per degree Celsius above 25 C cell temperature.",
+      "citations": [
+        "01_panel_sizing#p3"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "01_panel_sizing#p3",
+        "05_wiring_protection#p2",
+        "03_lifepo4_batteries#p3",
+        "03_lifepo4_batteries#p2"
+      ],
+      "expected_doc": "01_panel_sizing",
+      "latency_ms": 0.28
+    },
+    {
+      "id": "q04",
+      "query": "What tilt angle should I use for panels in Lagos?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "generation_failure",
+      "answer": "Orientation: in the northern hemisphere tropics, a tilt angle equal to latitude (6.5 degrees for Lagos) facing south is optimal, but tilts below 10 degrees accumulate dust and reduce self-cleaning by rain.",
+      "citations": [
+        "01_panel_sizing#p4"
+      ],
+      "confidence": 0.92,
+      "retrieved": [
+        "01_panel_sizing#p4",
+        "01_panel_sizing#p2",
+        "01_panel_sizing#p3",
+        "08_economics_payback#p3"
+      ],
+      "expected_doc": "01_panel_sizing",
+      "latency_ms": 0.21
+    },
+    {
+      "id": "q05",
+      "query": "How much continuous AC power does a 5.5 kVA hybrid inverter deliver?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "A 5.5 kVA hybrid inverter at 0.9 power factor delivers about 5,000 W continuous AC output.",
+      "citations": [
+        "02_hybrid_inverters#p0"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "02_hybrid_inverters#p0",
+        "06_generator_integration#p1",
+        "04_load_management#p1",
+        "02_hybrid_inverters#p2"
+      ],
+      "expected_doc": "02_hybrid_inverters",
+      "latency_ms": 0.27
+    },
+    {
+      "id": "q06",
+      "query": "What does an F07 overload fault during compressor start mean?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Common failure symptom: an F07 or overload fault during compressor start indicates surge exceeding the inverter's 5-second rating.",
+      "citations": [
+        "02_hybrid_inverters#p4"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "02_hybrid_inverters#p4",
+        "04_load_management#p1",
+        "04_load_management#p0",
+        "07_monitoring_maintenance#p0"
+      ],
+      "expected_doc": "02_hybrid_inverters",
+      "latency_ms": 0.32
+    },
+    {
+      "id": "q07",
+      "query": "Is PV overpaneling harmful to a hybrid inverter?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "PV overpaneling: most 5.5 kVA hybrid inverters accept up to 6,000-6,500 W of PV, but the MPPT will clip charging at its DC output ceiling, typically about 100 A of battery charge current at 48 V nominal (about 5,100 W into the battery bus).",
+      "citations": [
+        "02_hybrid_inverters#p2"
+      ],
+      "confidence": 0.92,
+      "retrieved": [
+        "02_hybrid_inverters#p2",
+        "02_hybrid_inverters#p1",
+        "02_hybrid_inverters#p0",
+        "08_economics_payback#p3"
+      ],
+      "expected_doc": "02_hybrid_inverters",
+      "latency_ms": 0.23
+    },
+    {
+      "id": "q08",
+      "query": "What is SBU priority mode?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Transfer behavior: in SBU (Solar-Battery-Utility) priority mode, the inverter uses solar first, battery second, and grid only when battery voltage falls below the configured cut-in point.",
+      "citations": [
+        "02_hybrid_inverters#p3"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "02_hybrid_inverters#p3",
+        "06_generator_integration#p3"
+      ],
+      "expected_doc": "02_hybrid_inverters",
+      "latency_ms": 0.13
+    },
+    {
+      "id": "q09",
+      "query": "How many cycles does a LiFePO4 battery last compared to lead-acid?",
+      "tags": [
+        "comparison"
+      ],
+      "outcome": "correct",
+      "answer": "A quality LiFePO4 bank delivers 4,000-6,000 cycles to 80 percent remaining capacity at 80 percent depth of discharge (DoD), versus 400-600 cycles for lead-acid at 50 percent DoD.",
+      "citations": [
+        "03_lifepo4_batteries#p0"
+      ],
+      "confidence": 0.89,
+      "retrieved": [
+        "03_lifepo4_batteries#p0",
+        "03_lifepo4_batteries#p1",
+        "08_economics_payback#p4",
+        "08_economics_payback#p2"
+      ],
+      "expected_doc": "03_lifepo4_batteries",
+      "latency_ms": 0.22
+    },
+    {
+      "id": "q10",
+      "query": "What bulk charge voltage should I set for a 48V LiFePO4 bank?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Recommended charge parameters for a 48 V (16S) LiFePO4 bank: bulk/absorb at 55.2-56.0 V, float at 54.0 V or disabled, low-voltage cutoff at 46.0-47.0 V.",
+      "citations": [
+        "03_lifepo4_batteries#p2"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "03_lifepo4_batteries#p2",
+        "06_generator_integration#p2",
+        "03_lifepo4_batteries#p4",
+        "03_lifepo4_batteries#p1"
+      ],
+      "expected_doc": "03_lifepo4_batteries",
+      "latency_ms": 0.26
+    },
+    {
+      "id": "q11",
+      "query": "How much usable energy does an 18 kWh LiFePO4 bank provide?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Usable energy: an 18 kWh LiFePO4 bank at 90 percent usable DoD provides about 16.2 kWh of usable storage.",
+      "citations": [
+        "03_lifepo4_batteries#p1"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "03_lifepo4_batteries#p1",
+        "04_load_management#p4",
+        "08_economics_payback#p0",
+        "08_economics_payback#p2"
+      ],
+      "expected_doc": "03_lifepo4_batteries",
+      "latency_ms": 0.21
+    },
+    {
+      "id": "q12",
+      "query": "Why is voltage a bad way to estimate state of charge on lithium batteries?",
+      "tags": [
+        "paraphrase"
+      ],
+      "outcome": "generation_failure",
+      "answer": "The provided documents do not answer this.",
+      "citations": [],
+      "confidence": 0.15,
+      "retrieved": [
+        "03_lifepo4_batteries#p4",
+        "06_generator_integration#p2",
+        "03_lifepo4_batteries#p0",
+        "03_lifepo4_batteries#p2"
+      ],
+      "expected_doc": "03_lifepo4_batteries",
+      "latency_ms": 0.13
+    },
+    {
+      "id": "q13",
+      "query": "How much energy does an inverter AC save compared to a fixed-speed unit overnight?",
+      "tags": [
+        "comparison"
+      ],
+      "outcome": "generation_failure",
+      "answer": "For a solar-plus-storage home, replacing a fixed-speed AC with an inverter AC is usually the highest-leverage single upgrade: it simultaneously reduces battery drain overnight, removes the surge constraint, and frees inverter headroom for other loads.",
+      "citations": [
+        "04_load_management#p2"
+      ],
+      "confidence": 0.86,
+      "retrieved": [
+        "04_load_management#p2",
+        "04_load_management#p0",
+        "02_hybrid_inverters#p0",
+        "04_load_management#p1"
+      ],
+      "expected_doc": "04_load_management",
+      "latency_ms": 0.23
+    },
+    {
+      "id": "q14",
+      "query": "What is the single best upgrade for a solar home to reduce battery drain?",
+      "tags": [
+        "paraphrase"
+      ],
+      "outcome": "correct",
+      "answer": "For a solar-plus-storage home, replacing a fixed-speed AC with an inverter AC is usually the highest-leverage single upgrade: it simultaneously reduces battery drain overnight, removes the surge constraint, and frees inverter headroom for other loads.",
+      "citations": [
+        "04_load_management#p2"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "04_load_management#p2",
+        "01_panel_sizing#p4",
+        "03_lifepo4_batteries#p0",
+        "04_load_management#p3"
+      ],
+      "expected_doc": "04_load_management",
+      "latency_ms": 0.24
+    },
+    {
+      "id": "q15",
+      "query": "What size fuse should protect the battery cable for a 5 kW inverter at 48 V?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "For a 5 kW inverter at 48 V (about 110 A continuous), a 150 A Class T fuse is standard.",
+      "citations": [
+        "05_wiring_protection#p1"
+      ],
+      "confidence": 0.92,
+      "retrieved": [
+        "05_wiring_protection#p1",
+        "05_wiring_protection#p0",
+        "06_generator_integration#p1",
+        "02_hybrid_inverters#p2"
+      ],
+      "expected_doc": "05_wiring_protection",
+      "latency_ms": 0.27
+    },
+    {
+      "id": "q16",
+      "query": "Are cheap DC-labeled MCBs safe for breaking battery fault current?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "MCBs marketed as \"DC\" at 125 A are frequently AC breakers relabeled; they cannot safely break a 48 V battery fault current.",
+      "citations": [
+        "05_wiring_protection#p1"
+      ],
+      "confidence": 0.88,
+      "retrieved": [
+        "05_wiring_protection#p1",
+        "02_hybrid_inverters#p2",
+        "08_economics_payback#p3",
+        "05_wiring_protection#p0"
+      ],
+      "expected_doc": "05_wiring_protection",
+      "latency_ms": 0.24
+    },
+    {
+      "id": "q17",
+      "query": "Why does my hybrid inverter keep rejecting my petrol generator?",
+      "tags": [
+        "diagnostic",
+        "paraphrase"
+      ],
+      "outcome": "generation_failure",
+      "answer": "A hybrid inverter combines a solar charge controller (MPPT), battery inverter/charger, and grid/generator transfer switch in one unit.",
+      "citations": [
+        "02_hybrid_inverters#p0"
+      ],
+      "confidence": 0.8,
+      "retrieved": [
+        "06_generator_integration#p1",
+        "06_generator_integration#p0",
+        "02_hybrid_inverters#p0",
+        "06_generator_integration#p4"
+      ],
+      "expected_doc": "06_generator_integration",
+      "latency_ms": 0.25
+    },
+    {
+      "id": "q18",
+      "query": "How big a generator do I need to charge at 80 A while running 1.5 kW of loads?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "A 5.5 kVA inverter charging at 80 A into 48 V (about 4.4 kW) while carrying 1.5 kW of loads needs a generator delivering 6 kW continuously.",
+      "citations": [
+        "06_generator_integration#p1"
+      ],
+      "confidence": 0.92,
+      "retrieved": [
+        "06_generator_integration#p1",
+        "06_generator_integration#p2",
+        "04_load_management#p0",
+        "08_economics_payback#p3"
+      ],
+      "expected_doc": "06_generator_integration",
+      "latency_ms": 0.24
+    },
+    {
+      "id": "q19",
+      "query": "How much does petrol generation cost per kWh in Nigeria versus solar?",
+      "tags": [
+        "comparison"
+      ],
+      "outcome": "correct",
+      "answer": "Fuel economics in Nigeria (2025-2026): petrol generation costs roughly N350-500 per kWh delivered after fuel and maintenance, versus solar-plus-LiFePO4 lifetime cost of N80-150 per kWh, which is why solar displacement of generator runtime typically pays back in 18-30 months.",
+      "citations": [
+        "06_generator_integration#p4"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "06_generator_integration#p4",
+        "08_economics_payback#p1",
+        "08_economics_payback#p2",
+        "08_economics_payback#p0"
+      ],
+      "expected_doc": "06_generator_integration",
+      "latency_ms": 0.21
+    },
+    {
+      "id": "q20",
+      "query": "How often should panels be cleaned during harmattan and why?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Panel cleaning: in dusty dry-season conditions (harmattan, December-February in West Africa), soiling losses reach 15-25 percent within 3-4 weeks.",
+      "citations": [
+        "07_monitoring_maintenance#p2"
+      ],
+      "confidence": 0.52,
+      "retrieved": [
+        "07_monitoring_maintenance#p2",
+        "02_hybrid_inverters#p4",
+        "01_panel_sizing#p2",
+        "08_economics_payback#p3"
+      ],
+      "expected_doc": "07_monitoring_maintenance",
+      "latency_ms": 0.2
+    },
+    {
+      "id": "q21",
+      "query": "My daily solar yield has dropped 10 percent for two weeks, what should I suspect?",
+      "tags": [
+        "diagnostic",
+        "paraphrase"
+      ],
+      "outcome": "generation_failure",
+      "answer": "The provided documents do not answer this.",
+      "citations": [],
+      "confidence": 0.15,
+      "retrieved": [
+        "07_monitoring_maintenance#p1",
+        "01_panel_sizing#p4",
+        "01_panel_sizing#p0",
+        "01_panel_sizing#p3"
+      ],
+      "expected_doc": "07_monitoring_maintenance",
+      "latency_ms": 0.17
+    },
+    {
+      "id": "q22",
+      "query": "What fraction of total system cost is the battery bank?",
+      "tags": [
+        "direct"
+      ],
+      "outcome": "correct",
+      "answer": "Capital cost breakdown for a representative 5.5 kVA / 5.6 kWp / 18 kWh LiFePO4 system in Nigeria (2026 prices): panels 25-30 percent, battery bank 40-45 percent, inverter 15-18 percent, balance-of-system (mounting, cabling, protection, installation) 12-15 percent.",
+      "citations": [
+        "08_economics_payback#p0"
+      ],
+      "confidence": 0.95,
+      "retrieved": [
+        "08_economics_payback#p2",
+        "08_economics_payback#p0",
+        "01_panel_sizing#p1",
+        "03_lifepo4_batteries#p1"
+      ],
+      "expected_doc": "08_economics_payback",
+      "latency_ms": 0.21
+    },
+    {
+      "id": "q23",
+      "query": "Which component should I buy last if staging purchases and why?",
+      "tags": [
+        "paraphrase"
+      ],
+      "outcome": "correct",
+      "answer": "Financing note: naira devaluation makes imported components track USD; buyers who can stage purchases should buy the battery last, since LiFePO4 USD prices continue to decline while panel prices have flattened.",
+      "citations": [
+        "08_economics_payback#p4"
+      ],
+      "confidence": 0.82,
+      "retrieved": [
+        "08_economics_payback#p4",
+        "08_economics_payback#p3"
+      ],
+      "expected_doc": "08_economics_payback",
+      "latency_ms": 0.12
+    },
+    {
+      "id": "q24",
+      "query": "What is the warranty period on a Deye 5.5 kVA inverter?",
+      "tags": [
+        "unanswerable"
+      ],
+      "outcome": "correct_abstention",
+      "answer": "The provided documents do not answer this.",
+      "citations": [],
+      "confidence": 0.15,
+      "retrieved": [
+        "02_hybrid_inverters#p0",
+        "08_economics_payback#p0",
+        "02_hybrid_inverters#p2",
+        "06_generator_integration#p1"
+      ],
+      "expected_doc": null,
+      "latency_ms": 0.13
+    }
+  ]
+}

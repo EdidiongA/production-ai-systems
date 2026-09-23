@@ -1,0 +1,65 @@
+# Copy to .github/workflows/deploy.yml in the repo that holds this platform.
+# Auth is GitHub OIDC -> AWS IAM role assumption: NO long-lived AWS keys in CI.
+name: platform-deploy
+on:
+  workflow_dispatch:        # deploys are deliberate, not every push
+    inputs:
+      apply:
+        description: "Set to 'yes' to apply (otherwise plan only)"
+        default: "no"
+
+permissions:
+  id-token: write           # OIDC token for AWS role assumption
+  contents: read
+
+env:
+  AWS_REGION: eu-west-1
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - uses: hashicorp/setup-terraform@v3
+      - working-directory: platform/terraform
+        run: terraform init && terraform plan -out=tfplan
+      - if: github.event.inputs.apply == 'yes'
+        working-directory: platform/terraform
+        run: terraform apply -auto-approve tfplan
+
+  build-and-deploy:
+    needs: terraform
+    if: github.event.inputs.apply == 'yes'
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - { dir: project1-rag-failure-analysis, repo: rag-api }
+          - { dir: project2-agent-loop-design,   repo: asset-agent }
+          - { dir: project3-data-pipeline,       repo: ticket-pipeline }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - id: ecr
+        uses: aws-actions/amazon-ecr-login@v2
+      - name: Build and push (immutable tag = git SHA)
+        run: |
+          IMG=${{ steps.ecr.outputs.registry }}/${{ matrix.repo }}:${GITHUB_SHA::12}
+          docker build -t "$IMG" ${{ matrix.dir }}
+          docker push "$IMG"
+      - name: Deploy manifests with pinned tag
+        run: |
+          aws eks update-kubeconfig --name ml-platform --region $AWS_REGION
+          kubectl apply -f platform/k8s/namespace.yaml
+          for f in platform/k8s/*.yaml platform/k8s/monitoring/*.yaml; do
+            sed -e "s|ECR_REGISTRY|${{ steps.ecr.outputs.registry }}|g" \
+                -e "s|IMAGE_TAG|${GITHUB_SHA::12}|g" "$f" | kubectl apply -f -
+          done
+          kubectl -n ml-platform rollout status deploy/rag-api --timeout=180s

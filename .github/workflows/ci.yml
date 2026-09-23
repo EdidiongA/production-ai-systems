@@ -1,0 +1,33 @@
+name: portfolio-ci
+on:
+  push: { branches: [main] }
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - project1-rag-failure-analysis
+          - project2-agent-loop-design
+          - project3-data-pipeline
+    defaults:
+      run: { working-directory: ${{ matrix.project }} }
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12", cache: pip }
+      - run: pip install -r requirements.txt
+      - name: Generate data (pipeline only)
+        if: matrix.project == 'project3-data-pipeline'
+        run: python -m pipeline.generate_messy_data
+      - name: Eval suite (deterministic mock backend, $0)
+        run: python -m evals.run_eval
+      - name: Regression gates
+        run: pytest evals/ -q
+      - name: Dependency audit (non-blocking)
+        run: pip install pip-audit && pip-audit || true
+      - name: Docker build
+        run: docker build -t ${{ matrix.project }}:ci .

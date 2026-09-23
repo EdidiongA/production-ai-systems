@@ -1,0 +1,14 @@
+# Requires kube-prometheus-stack (helm install instructions in platform/README.md)
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: rag-api
+  namespace: ml-platform
+  labels: { release: kube-prometheus-stack }
+spec:
+  selector:
+    matchLabels: { app: rag-api }
+  endpoints:
+    - port: http
+      path: /prometheus
+      interval: 30s

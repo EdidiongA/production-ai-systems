@@ -1,0 +1,17 @@
+# Local multi-service run:  docker compose up --build
+# Live model backends:      export ANTHROPIC_API_KEY=... before `up`
+services:
+  rag:
+    build: ./project1-rag-failure-analysis
+    ports: ["8001:8000"]
+    environment: [ "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}" ]
+    restart: unless-stopped
+  agent:
+    build: ./project2-agent-loop-design
+    ports: ["8002:8000"]
+    environment: [ "ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-}" ]
+    restart: unless-stopped
+  pipeline:
+    build: ./project3-data-pipeline
+    ports: ["8003:8000"]
+    restart: unless-stopped

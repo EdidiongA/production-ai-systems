@@ -1,0 +1,105 @@
+{
+  "summary": {
+    "checks": 15,
+    "passed": 15,
+    "pass_rate": 1.0,
+    "ingest_report": {
+      "run_id": "3c0466c674",
+      "raw_rows": 120,
+      "blank_rows": 2,
+      "accepted": 102,
+      "rejected": 18,
+      "transformed_fields": 402,
+      "quality_score": 0.85,
+      "reject_reasons": {
+        "missing_subject": 5,
+        "unknown_office": 8,
+        "schema_opened_date_value_error": 1,
+        "schema_cost_usd_greater_than_equal": 1,
+        "duplicate_ticket_id": 1,
+        "missing_ticket_id": 1,
+        "invalid_or_missing_date": 1
+      },
+      "elapsed_ms": 6.2,
+      "conservation_ok": true,
+      "physical_conservation_ok": true
+    }
+  },
+  "results": [
+    {
+      "name": "conservation: accepted+rejected == raw_rows",
+      "passed": true,
+      "detail": "102+18==120"
+    },
+    {
+      "name": "invalid calendar date (2026-02-30) caught",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "negative cost rejected by schema",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "duplicate ticket id rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "missing ticket id rejected",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "quality score in (0,1) and persisted",
+      "passed": true,
+      "detail": "0.85"
+    },
+    {
+      "name": "every rejection logged with reason + raw record",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "mojibake subject repaired to UTF-8",
+      "passed": true,
+      "detail": "Caf\u00e9 kiosk r\u00e9seau down"
+    },
+    {
+      "name": "naive total is a meaningless cross-currency number",
+      "passed": true,
+      "detail": "naive=15,263,872 (mixed units) vs pipeline=44,538.42 USD"
+    },
+    {
+      "name": "naive load keeps duplicate ids the pipeline rejects",
+      "passed": true,
+      "detail": "2 duplicate id(s) kept"
+    },
+    {
+      "name": "naive load keeps the negative cost",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "retrieval returns printer tickets from validated rows",
+      "passed": true,
+      "detail": "top: LAG-1010 Printer offline in finance"
+    },
+    {
+      "name": "retrieval handles multi-field queries",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "structured summary validates against TicketSummary schema",
+      "passed": true,
+      "detail": ""
+    },
+    {
+      "name": "summary numbers match SQL ground truth",
+      "passed": true,
+      "detail": "102 tickets, 44538.42 USD, 6 open P1"
+    }
+  ]
+}

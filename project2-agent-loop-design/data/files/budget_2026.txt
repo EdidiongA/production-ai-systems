@@ -1,0 +1,4 @@
+FY2026 Infrastructure Budget
+renewal_budget_usd=25000
+replacement_budget_usd=60000
+approved_by=Head of IT

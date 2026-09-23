@@ -1,0 +1,40 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: rag-api-alerts
+  namespace: ml-platform
+  labels: { release: kube-prometheus-stack }
+spec:
+  groups:
+    - name: rag-api.domain
+      rules:
+        # The alerts that matter for a model API are DOMAIN alerts, not CPU:
+        - alert: RagAbstentionRateHigh
+          expr: rag_abstention_rate > 0.25
+          for: 10m
+          labels: { severity: warning }
+          annotations:
+            summary: "RAG abstention rate above 25% for 10m"
+            description: "Likely retrieval or corpus regression - check the last deploy's eval report."
+        - alert: RagSchemaViolations
+          expr: increase(rag_schema_violations_total[15m]) > 5
+          labels: { severity: warning }
+          annotations:
+            summary: "Model output failing schema validation repeatedly"
+        - alert: RagLatencyP95High
+          expr: rag_latency_p95_ms > 5000
+          for: 10m
+          labels: { severity: warning }
+          annotations:
+            summary: "p95 latency over 5s for 10m"
+        - alert: RagCostBurnRate
+          expr: increase(rag_cost_usd_total[1h]) > 2
+          labels: { severity: critical }
+          annotations:
+            summary: "Model spend above $2/hour - check for abuse or a runaway client"
+        - alert: RagApiDown
+          expr: up{namespace="ml-platform"} == 0
+          for: 5m
+          labels: { severity: critical }
+          annotations:
+            summary: "rag-api target down for 5m"

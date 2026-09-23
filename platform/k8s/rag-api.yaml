@@ -1,0 +1,85 @@
+# The "ML model as a production API" workload: the RAG service.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rag-api
+  namespace: ml-platform
+  labels: { app: rag-api }
+spec:
+  replicas: 2
+  selector:
+    matchLabels: { app: rag-api }
+  template:
+    metadata:
+      labels: { app: rag-api }
+    spec:
+      containers:
+        - name: rag-api
+          image: ECR_REGISTRY/rag-api:IMAGE_TAG   # pinned by CI, never :latest
+          ports:
+            - name: http
+              containerPort: 8000
+          env:
+            - name: ANTHROPIC_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: anthropic
+                  key: api-key
+                  optional: true        # absent -> deterministic mock backend
+          resources:
+            requests: { cpu: 100m, memory: 256Mi }
+            limits:   { cpu: 500m, memory: 512Mi }
+          readinessProbe:
+            httpGet: { path: /health, port: http }
+            initialDelaySeconds: 3
+            periodSeconds: 10
+          livenessProbe:
+            httpGet: { path: /health, port: http }
+            initialDelaySeconds: 10
+            periodSeconds: 20
+          securityContext:
+            runAsNonRoot: true
+            runAsUser: 10001
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: false   # writes logs/requests.jsonl
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: rag-api
+  namespace: ml-platform
+  labels: { app: rag-api }
+spec:
+  selector: { app: rag-api }
+  ports:
+    - name: http
+      port: 80
+      targetPort: http
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: rag-api
+  namespace: ml-platform
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: rag-api
+  minReplicas: 2
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: { type: Utilization, averageUtilization: 70 }
+---
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: rag-api
+  namespace: ml-platform
+spec:
+  minAvailable: 1
+  selector:
+    matchLabels: { app: rag-api }

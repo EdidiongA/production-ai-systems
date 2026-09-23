@@ -1,0 +1,51 @@
+ticket_id,opened,office,category,priority,cost_ngn,status,subject
+LAG-1001,08/05/2026,Lagos HQ,,P4,"N126,000",resolved,
+LAG-1002,15/01/2026,Lagos HQ,email,High,"N87,000",closed,Switch port dead on floor 2
+LAG-1003,24/03/2026,Lagos,printer,low,"N370,000",closed,Excel file corrupt
+LAG-1004,01/06/2026,LAGOS,email,P4,596000,closed,Switch port dead on floor 2
+LAG-1005,14/05/2026,Lagos HQ,misc,low,"N604,000",closed,Sage Evolution login failure
+LAG-1006,19/02/2026,lagos,hardware,P2,"N530,000",OPEN,Password reset needed
+LAG-1007,21/06/2026,Lagos HQ,,low,"N498,000",OPEN,Outlook not syncing
+LAG-1008,26/04/2026,Lagos HQ,access,low,,in progress,
+LAG-1009,26/05/2026,Lagos HQ,email,High,,in progress,Sage Evolution login failure
+LAG-1010,26/04/2026,Lagos,printer,URGENT,,closed,Printer offline in finance
+LAG-1011,15/02/2026,Lagos HQ,,P2,738000,in progress,Shared drive access denied
+LAG-1012,05/04/2026,Lagos,software,P1,,closed,Switch port dead on floor 2
+LAG-1013,08/01/2026,Lagos,printer,URGENT,90000 NGN,resolved,
+LAG-1014,23/06/2026,lagos,access,P4,,OPEN,UPS beeping in server room
+LAG-1015,14/06/2026,lagos,network,low,"N714,000",OPEN,Phishing email reported
+LAG-1016,13/01/2026,Lagos,misc,P2,537000 NGN,open,Excel file corrupt
+LAG-1017,17/04/2026,LAGOS,printer,P4,"N366,000",in progress,Sage Evolution login failure
+LAG-1018,05/05/2026,lagos,misc,URGENT,590000 NGN,closed,Excel file corrupt
+LAG-1019,02/02/2026,lagos,hardware,P1,,closed,Excel file corrupt
+LAG-1020,05/06/2026,lagos,network,P3,"N198,000",resolved,Wi-Fi drops in conference room
+LAG-1021,13/03/2026,lagos,email,P3,"N550,000",in progress,Phishing email reported
+LAG-1022,06/03/2026,Lagos HQ,,P2,,OPEN,Phishing email reported
+LAG-1023,08/01/2026,Lagos,,URGENT,840000 NGN,closed,Domain controller replication alert
+LAG-1024,01/03/2026,lagos,email,High,871000 NGN,open,Outlook not syncing
+LAG-1025,19/03/2026,LAGOS,network,P2,774000 NGN,in progress,Wi-Fi drops in conference room
+LAG-1026,25/03/2026,lagos,software,URGENT,"N180,000",in progress,Printer offline in finance
+LAG-1027,09/01/2026,Lagos,misc,low,170000,closed,Cannot connect to VPN
+LAG-1028,04/01/2026,LAGOS,email,P4,28000,OPEN,Projector HDMI no signal
+LAG-1029,20/02/2026,Lagos HQ,misc,P2,418000,in progress,Excel file corrupt
+LAG-1030,02/06/2026,Lagos HQ,hardware,low,303000,in progress,Phishing email reported
+LAG-1031,11/05/2026,Lagos,email,High,,OPEN,
+LAG-1032,04/01/2026,lagos,email,low,"N120,000",open,Password reset needed
+LAG-1033,08/04/2026,lagos,network,P3,,OPEN,
+LAG-1034,09/02/2026,lagos,hardware,P1,,in progress,Wi-Fi drops in conference room
+LAG-1035,27/02/2026,Lagos,printer,URGENT,"N275,000",OPEN,Shared drive access denied
+LAG-1036,21/02/2026,Lagos HQ,hardware,High,"N62,000",OPEN,Switch port dead on floor 2
+LAG-1037,26/02/2026,LAGOS,email,High,413000,in progress,Excel file corrupt
+LAG-1038,26/06/2026,LAGOS,access,P3,,closed,Switch port dead on floor 2
+LAG-1039,26/01/2026,lagos,software,low,,in progress,Outlook not syncing
+LAG-1040,01/05/2026,lagos,printer,P1,"N146,000",closed,New starter account setup
+LAG-1041,17/01/2026,Lagos,network,medium,664000 NGN,in progress,Outlook not syncing
+LAG-1042,06/03/2026,LAGOS,printer,URGENT,760000 NGN,resolved,Laptop screen flickering
+LAG-1043,14/03/2026,lagos,hardware,P3,,in progress,Password reset needed
+LAG-1044,27/03/2026,Lagos,email,low,"N34,000",resolved,UPS beeping in server room
+LAG-1045,11/04/2026,Lagos,software,medium,"N629,000",in progress,Excel file corrupt
+LAG-1046,04/05/2026,lagos,email,P4,,OPEN,Printer offline in finance
+LAG-1047,25/03/2026,LAGOS,access,P3,,in progress,New starter account setup
+LAG-1048,13/03/2026,lagos,access,P4,,resolved,Switch port dead on floor 2
+LAG-1049,14/05/2026,Lagos HQ,access,P3,811000,closed,Excel file corrupt
+LAG-1050,11/01/2026,LAGOS,printer,P4,446000,in progress,Excel file corrupt
