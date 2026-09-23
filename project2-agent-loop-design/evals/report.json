@@ -25,7 +25,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Computed to",
-      "run_id": "e0e977f9f7e9"
+      "run_id": "c10e5ad9d1cd"
     },
     {
       "id": "t02",
@@ -38,7 +38,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 1,
       "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Total renew",
-      "run_id": "f376ee60668f"
+      "run_id": "f110a8524bd1"
     },
     {
       "id": "t03",
@@ -51,7 +51,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Policy: [procurement_policy] Hardware warranty renewals above 5,000 USD require Head of IT approval and two vendor quotes. Renewals at or below 5,000 USD can be approved by the inf",
-      "run_id": "d3881faf144b"
+      "run_id": "c5c295083f8e"
     },
     {
       "id": "t04",
@@ -64,7 +64,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Counts by location: [{'location': 'Lagos', 'n': 6}, {'location': 'Accra', 'n': 2}, {'location': 'Freetown', 'n': 1}, {'location': 'Banjul', 'n': 1}]",
-      "run_id": "8315646a1a16"
+      "run_id": "8fe5d2d25d4a"
     },
     {
       "id": "t05",
@@ -77,7 +77,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Unsupported-OS assets (critical finding per security policy): [{'hostname': 'acc-app-01', 'os': 'Windows Server 2012', 'location': 'Accra'}] Policy: [procurement_policy] Hardware w",
-      "run_id": "1749961216d1"
+      "run_id": "db0fd3985c5f"
     },
     {
       "id": "t06",
@@ -90,7 +90,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "FY2026 renewal budget: 25000 USD.",
-      "run_id": "684b6fe17e56"
+      "run_id": "9d996098a6aa"
     },
     {
       "id": "t07",
@@ -103,7 +103,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Assets due: lag-lap-014 (2026-07-20, $350), lag-db-01 (2026-07-25, $5600), lag-lap-022 (2026-08-02, $350), lag-dc-01 (2026-08-15, $4200), lag-dc-02 (2026-08-15, $4200). Computed to",
-      "run_id": "9ec03b07231d"
+      "run_id": "55f117ed9d8c"
     },
     {
       "id": "t08",
@@ -116,7 +116,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 3,
       "answer": "",
-      "run_id": "d054c2b19b51"
+      "run_id": "78545b107529"
     },
     {
       "id": "t09",
@@ -129,7 +129,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "Counts by location: [{'location': 'Lagos', 'n': 6}, {'location': 'Accra', 'n': 2}, {'location': 'Freetown', 'n': 1}, {'location': 'Banjul', 'n': 1}]",
-      "run_id": "cf5787ee17c3"
+      "run_id": "e98b26b5c1cc"
     },
     {
       "id": "t10",
@@ -142,7 +142,7 @@
       "est_cost_usd": 0.0,
       "tool_errors_survived": 0,
       "answer": "",
-      "run_id": "3c55ba4ad50a"
+      "run_id": "fce419f06d9a"
     }
   ]
 }

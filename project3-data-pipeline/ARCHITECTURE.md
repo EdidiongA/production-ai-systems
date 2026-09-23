@@ -1,4 +1,4 @@
-# Architecture — Mini Data Pipeline for AI-Ready Data
+# Architecture: Mini Data Pipeline for AI-Ready Data
 
 ## System architecture
 
@@ -70,7 +70,7 @@ project3-data-pipeline/
 | subject | TEXT | 1–200 chars, mojibake-repaired |
 | source_batch, ingest_run | TEXT | provenance |
 
-Indexes: `(status, priority)`, `(office)` — the consumer's hot filters.
+Indexes: `(status, priority)`, `(office)`, the consumer's hot filters.
 
 **ingest_runs** (the monitoring table): run_id, ts, raw_rows, blank_rows,
 accepted, rejected, transformed_fields, quality_score, reject_reasons (JSON),
@@ -80,12 +80,12 @@ elapsed_ms. One row per run → quality becomes a time series.
 
 | Method | Path | Request | Response | Errors |
 |---|---|---|---|---|
-| GET | `/` | — | dashboard UI | — |
-| POST | `/ingest` | — | run report (score, reasons, counts) | — |
-| GET | `/quality` | — | last 20 run reports (drift view) | 404 no runs |
+| GET | `/` | - | dashboard UI | - |
+| POST | `/ingest` | - | run report (score, reasons, counts) | - |
+| GET | `/quality` | - | last 20 run reports (drift view) | 404 no runs |
 | GET | `/query` | `q: str 2..200, top_k≤20` | validated matching tickets + scores | 404 no data, 422 |
-| GET | `/summary` | — | schema-validated `TicketSummary` | 404 no data |
-| GET | `/health` | — | status, db_exists | — |
+| GET | `/summary` | - | schema-validated `TicketSummary` | 404 no data |
+| GET | `/health` | - | status, db_exists | - |
 
 ## UI architecture
 

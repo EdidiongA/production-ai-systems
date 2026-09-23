@@ -1,4 +1,4 @@
-# Architecture — RAG System with Failure Analysis
+# Architecture: RAG System with Failure Analysis
 
 ## System architecture
 
@@ -52,7 +52,7 @@ project1-rag-failure-analysis/
 
 ## Data schema
 
-No database — the store is the chunk index (in-memory) plus append-only JSONL logs.
+No database, the store is the chunk index (in-memory) plus append-only JSONL logs.
 
 **Chunk** (in-memory): `chunk_id` (str, `"<doc>::p<n>"`), `doc` (str), `text` (str).
 
@@ -67,10 +67,10 @@ token estimates, est_cost_usd, timestamp.
 
 | Method | Path | Request | Response | Errors |
 |---|---|---|---|---|
-| GET | `/` | — | UI (HTML) | — |
+| GET | `/` | - | UI (HTML) | - |
 | POST | `/ask` | `{query: str 3..500}` | `QueryResult` (RAGAnswer + latency, tokens, cost) | 422 invalid, 429 rate limit, 502 unrepairable schema violation |
-| GET | `/health` | — | status, chunks_indexed, model | — |
-| GET | `/metrics` | — | requests, abstention_rate, schema_violations, avg/p95 latency, cost totals, cost/1k | — |
+| GET | `/health` | - | status, chunks_indexed, model | - |
+| GET | `/metrics` | - | requests, abstention_rate, schema_violations, avg/p95 latency, cost totals, cost/1k | - |
 
 ## UI architecture
 
@@ -78,6 +78,6 @@ Single static page (`static/index.html`), zero dependencies, served by the API
 itself. Three regions: ask form → answer card (`aria-live=polite`) → metrics
 strip. States handled: loading (spinner, `prefers-reduced-motion` respected),
 empty (pre-first-query), answered (citations + confidence), **abstained**
-(distinct badge — abstention is a first-class outcome, not an error), rate-limited
+(distinct badge - abstention is a first-class outcome, not an error), rate-limited
 (429 explained), validation error, network error. All dynamic text is
 HTML-escaped before insertion; focus states and labels on all controls.

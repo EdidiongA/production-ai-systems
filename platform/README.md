@@ -1,4 +1,4 @@
-# Platform Runbook — Terraform → EKS → Deployed, Monitored Systems
+# Platform Runbook: Terraform → EKS → Deployed, Monitored Systems
 
 The infrastructure layer under the three portfolio systems. Everything here is
 validated (`terraform validate` against the AWS provider ~>5.70; kubeconform on

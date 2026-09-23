@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ticket Pipeline — Quality Dashboard</title>
+<title>Ticket Pipeline - Quality Dashboard</title>
 <style>
   :root{--bg:#0f1419;--panel:#1a2129;--border:#2d3742;--text:#e6edf3;--muted:#8b98a5;
         --accent:#56d4a0;--warn:#d29922;--err:#f85149;--radius:10px}
@@ -44,7 +44,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Ticket Pipeline — Quality Dashboard</h1>
+    <h1>Ticket Pipeline - Quality Dashboard</h1>
     <p>Ingest quality over time, rejection reasons, and retrieval over the validated ticket store.</p>
   </header>
 
@@ -75,7 +75,7 @@ async function loadQuality(){
   const box = $('#quality');
   try{
     const r = await fetch('/quality');
-    if(r.status === 404){ box.innerHTML = '<p class="empty">No ingest runs yet — click "Re-run ingest".</p>'; return; }
+    if(r.status === 404){ box.innerHTML = '<p class="empty">No ingest runs yet - click "Re-run ingest".</p>'; return; }
     if(!r.ok) throw 0;
     const runs = await r.json(), m = runs[0];
     const reasons = Object.entries(m.reject_reasons)
@@ -118,8 +118,8 @@ $('#search-form').addEventListener('submit', async e => {
            <td>${esc(t.ticket_id)}</td><td>${esc(t.subject)}</td><td>${esc(t.office)}</td>
            <td>${esc(t.priority)}</td><td>${esc(t.status)}</td><td>${t.cost_usd}</td></tr>`).join('')}
          </tbody></table>`
-      : '<p class="empty">No matching tickets — try broader terms.</p>';
-  }catch{ out.innerHTML = '<p class="error">Network error — is the service running?</p>'; }
+      : '<p class="empty">No matching tickets - try broader terms.</p>';
+  }catch{ out.innerHTML = '<p class="error">Network error - is the service running?</p>'; }
   finally{ btn.disabled = false; }
 });
 loadQuality();

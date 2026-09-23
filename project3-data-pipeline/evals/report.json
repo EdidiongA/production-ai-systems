@@ -4,7 +4,7 @@
     "passed": 15,
     "pass_rate": 1.0,
     "ingest_report": {
-      "run_id": "3c0466c674",
+      "run_id": "be1df4ea1d",
       "raw_rows": 120,
       "blank_rows": 2,
       "accepted": 102,
@@ -20,7 +20,7 @@
         "missing_ticket_id": 1,
         "invalid_or_missing_date": 1
       },
-      "elapsed_ms": 6.2,
+      "elapsed_ms": 7.2,
       "conservation_ok": true,
       "physical_conservation_ok": true
     }

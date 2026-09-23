@@ -1,4 +1,4 @@
-# Architecture — AI Agent with Loop Design
+# Architecture: AI Agent with Loop Design
 
 ## System architecture
 
@@ -60,7 +60,7 @@ project2-agent-loop-design/
 
 ## Database schema
 
-`data/assets.db` — table **assets**:
+`data/assets.db` - table **assets**:
 
 | column | type | notes |
 |---|---|---|
@@ -82,16 +82,16 @@ tokens_used, token_budget, error_streak, schema_failures, status, final_answer.
 
 | Method | Path | Request | Response | Errors |
 |---|---|---|---|---|
-| GET | `/` | — | UI (HTML) | — |
+| GET | `/` | - | UI (HTML) | - |
 | POST | `/run` | `{goal: str 5..500, token_budget≤12000, max_steps≤12}` | terminal `AgentState` | 422 invalid |
-| GET | `/runs/{run_id}` | — | checkpointed state (full audit trail) | 404 |
-| GET | `/health` | — | status, planner model, max budget | — |
-| GET | `/metrics` | — | runs, terminal-status distribution, completion_rate, tokens, est cost | — |
+| GET | `/runs/{run_id}` | - | checkpointed state (full audit trail) | 404 |
+| GET | `/health` | - | status, planner model, max budget | - |
+| GET | `/metrics` | - | runs, terminal-status distribution, completion_rate, tokens, est cost | - |
 
 ## UI architecture
 
 Single static page. Goal form → result card with terminal-status badge
-(`completed` green vs stopped amber — a stopped run is shown as a designed
+(`completed` green vs stopped amber, a stopped run is shown as a designed
 outcome with its stop condition named, not as an error) → step-trace table
 (per-step ok/fail dot, action, observation/error, `overflow-wrap` for long
 observations). States: loading, empty, completed, stopped-without-answer,

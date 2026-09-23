@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Solar RAG — Query Console</title>
+<title>Solar RAG - Query Console</title>
 <style>
   :root{--bg:#0f1419;--panel:#1a2129;--border:#2d3742;--text:#e6edf3;--muted:#8b98a5;
         --accent:#4da3ff;--ok:#3fb950;--warn:#d29922;--err:#f85149;--radius:10px}
@@ -41,7 +41,7 @@
 <body>
 <div class="wrap">
   <header>
-    <h1>Solar RAG — Query Console</h1>
+    <h1>Solar RAG - Query Console</h1>
     <p>Ask a question about the home solar corpus. Answers are schema-validated and citation-guarded.</p>
   </header>
 
@@ -57,7 +57,7 @@
 
   <section class="card" aria-live="polite" aria-labelledby="ans-h">
     <h2 id="ans-h" class="muted" style="margin-top:0">Answer</h2>
-    <div id="answer"><p class="empty">No question asked yet — results appear here.</p></div>
+    <div id="answer"><p class="empty">No question asked yet - results appear here.</p></div>
   </section>
 
   <section class="card" aria-labelledby="met-h">
@@ -92,7 +92,7 @@ $('#ask-form').addEventListener('submit', async e => {
   try{
     const r = await fetch('/ask', {method:'POST', headers:{'Content-Type':'application/json'},
                                    body: JSON.stringify({query: $('#q').value})});
-    if(r.status === 429){ out.innerHTML = '<p class="error">Rate limit exceeded — wait a minute and retry.</p>'; return; }
+    if(r.status === 429){ out.innerHTML = '<p class="error">Rate limit exceeded - wait a minute and retry.</p>'; return; }
     if(!r.ok){ const d = await r.json().catch(()=>({})); out.innerHTML =
       `<p class="error">Request failed (${r.status}): ${esc(d.detail || 'unknown error')}</p>`; return; }
     const d = await r.json(), a = d.result;
@@ -104,7 +104,7 @@ $('#ask-form').addEventListener('submit', async e => {
          <p>${esc(a.answer)}</p>
          <div class="muted">Citations (retrieved chunks only):</div>
          <ul class="cites">${a.citations.map(c=>`<li>${esc(c)}</li>`).join('') || '<li>none</li>'}</ul>`;
-  }catch{ out.innerHTML = '<p class="error">Network error — is the service running?</p>'; }
+  }catch{ out.innerHTML = '<p class="error">Network error - is the service running?</p>'; }
   finally{ btn.disabled = false; loadMetrics(); }
 });
 loadMetrics();

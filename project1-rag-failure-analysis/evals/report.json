@@ -9,8 +9,8 @@
       "generation_failure": 5
     },
     "retrieval_hit_rate": 1.0,
-    "avg_latency_ms": 0.24,
-    "p95_latency_ms": 0.28,
+    "avg_latency_ms": 0.27,
+    "p95_latency_ms": 0.33,
     "avg_input_tokens": 325,
     "avg_output_tokens": 62,
     "total_cost_usd": 0.0,
@@ -36,7 +36,7 @@
         "01_panel_sizing#p2"
       ],
       "expected_doc": "01_panel_sizing",
-      "latency_ms": 0.66
+      "latency_ms": 0.72
     },
     {
       "id": "q02",
@@ -57,7 +57,7 @@
         "08_economics_payback#p1"
       ],
       "expected_doc": "01_panel_sizing",
-      "latency_ms": 0.28
+      "latency_ms": 0.29
     },
     {
       "id": "q03",
@@ -99,7 +99,7 @@
         "08_economics_payback#p3"
       ],
       "expected_doc": "01_panel_sizing",
-      "latency_ms": 0.21
+      "latency_ms": 0.27
     },
     {
       "id": "q05",
@@ -120,7 +120,7 @@
         "02_hybrid_inverters#p2"
       ],
       "expected_doc": "02_hybrid_inverters",
-      "latency_ms": 0.27
+      "latency_ms": 0.29
     },
     {
       "id": "q06",
@@ -141,7 +141,7 @@
         "07_monitoring_maintenance#p0"
       ],
       "expected_doc": "02_hybrid_inverters",
-      "latency_ms": 0.32
+      "latency_ms": 0.26
     },
     {
       "id": "q07",
@@ -162,7 +162,7 @@
         "08_economics_payback#p3"
       ],
       "expected_doc": "02_hybrid_inverters",
-      "latency_ms": 0.23
+      "latency_ms": 0.27
     },
     {
       "id": "q08",
@@ -181,7 +181,7 @@
         "06_generator_integration#p3"
       ],
       "expected_doc": "02_hybrid_inverters",
-      "latency_ms": 0.13
+      "latency_ms": 0.17
     },
     {
       "id": "q09",
@@ -202,7 +202,7 @@
         "08_economics_payback#p2"
       ],
       "expected_doc": "03_lifepo4_batteries",
-      "latency_ms": 0.22
+      "latency_ms": 0.25
     },
     {
       "id": "q10",
@@ -223,7 +223,7 @@
         "03_lifepo4_batteries#p1"
       ],
       "expected_doc": "03_lifepo4_batteries",
-      "latency_ms": 0.26
+      "latency_ms": 0.3
     },
     {
       "id": "q11",
@@ -244,7 +244,7 @@
         "08_economics_payback#p2"
       ],
       "expected_doc": "03_lifepo4_batteries",
-      "latency_ms": 0.21
+      "latency_ms": 0.24
     },
     {
       "id": "q12",
@@ -263,7 +263,7 @@
         "03_lifepo4_batteries#p2"
       ],
       "expected_doc": "03_lifepo4_batteries",
-      "latency_ms": 0.13
+      "latency_ms": 0.15
     },
     {
       "id": "q13",
@@ -284,7 +284,7 @@
         "04_load_management#p1"
       ],
       "expected_doc": "04_load_management",
-      "latency_ms": 0.23
+      "latency_ms": 0.27
     },
     {
       "id": "q14",
@@ -305,7 +305,7 @@
         "04_load_management#p3"
       ],
       "expected_doc": "04_load_management",
-      "latency_ms": 0.24
+      "latency_ms": 0.34
     },
     {
       "id": "q15",
@@ -326,7 +326,7 @@
         "02_hybrid_inverters#p2"
       ],
       "expected_doc": "05_wiring_protection",
-      "latency_ms": 0.27
+      "latency_ms": 0.33
     },
     {
       "id": "q16",
@@ -347,7 +347,7 @@
         "05_wiring_protection#p0"
       ],
       "expected_doc": "05_wiring_protection",
-      "latency_ms": 0.24
+      "latency_ms": 0.32
     },
     {
       "id": "q17",
@@ -369,7 +369,7 @@
         "06_generator_integration#p4"
       ],
       "expected_doc": "06_generator_integration",
-      "latency_ms": 0.25
+      "latency_ms": 0.27
     },
     {
       "id": "q18",
@@ -390,7 +390,7 @@
         "08_economics_payback#p3"
       ],
       "expected_doc": "06_generator_integration",
-      "latency_ms": 0.24
+      "latency_ms": 0.29
     },
     {
       "id": "q19",
@@ -411,7 +411,7 @@
         "08_economics_payback#p0"
       ],
       "expected_doc": "06_generator_integration",
-      "latency_ms": 0.21
+      "latency_ms": 0.29
     },
     {
       "id": "q20",
@@ -432,7 +432,7 @@
         "08_economics_payback#p3"
       ],
       "expected_doc": "07_monitoring_maintenance",
-      "latency_ms": 0.2
+      "latency_ms": 0.23
     },
     {
       "id": "q21",
@@ -452,7 +452,7 @@
         "01_panel_sizing#p3"
       ],
       "expected_doc": "07_monitoring_maintenance",
-      "latency_ms": 0.17
+      "latency_ms": 0.16
     },
     {
       "id": "q22",
@@ -473,7 +473,7 @@
         "03_lifepo4_batteries#p1"
       ],
       "expected_doc": "08_economics_payback",
-      "latency_ms": 0.21
+      "latency_ms": 0.23
     },
     {
       "id": "q23",
@@ -492,7 +492,7 @@
         "08_economics_payback#p3"
       ],
       "expected_doc": "08_economics_payback",
-      "latency_ms": 0.12
+      "latency_ms": 0.17
     },
     {
       "id": "q24",
@@ -511,7 +511,7 @@
         "06_generator_integration#p1"
       ],
       "expected_doc": null,
-      "latency_ms": 0.13
+      "latency_ms": 0.15
     }
   ]
 }

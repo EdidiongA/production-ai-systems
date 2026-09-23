@@ -1,4 +1,4 @@
-# Deployment & Operations — All Three Systems
+# Deployment & Operations: All Three Systems
 
 ## Infrastructure architecture
 
@@ -6,7 +6,7 @@
                     Internet
                        │ TLS
               ┌────────▼─────────┐     auth (API keys), rate limits,
-              │ Reverse proxy    │     request-size caps — enforced ONCE
+              │ Reverse proxy    │     request-size caps - enforced ONCE
               │ (Caddy/Traefik)  │     here, not per-service
               └──┬─────┬─────┬───┘
         /rag ────┘  /agent  └──── /pipeline
@@ -18,11 +18,11 @@
             └──────────┼───────────┘
                        ▼
      volumes: logs/ (JSONL), checkpoints/, data/processed/
-     secrets: ANTHROPIC_API_KEY via env/secret store — never in images
+     secrets: ANTHROPIC_API_KEY via env/secret store - never in images
 ```
 
 Sizing honesty: these are single-process services with SQLite/in-memory state.
-The right first deployment is **one VM + docker-compose + a proxy** — not
+The right first deployment is **one VM + docker-compose + a proxy**: not
 Kubernetes. The K8s section below exists for when horizontal scale is real,
 and names the state changes that must happen *first*.
 
@@ -30,7 +30,7 @@ and names the state changes that must happen *first*.
 
 1. Push → CI (below) runs evals + regression gates + docker builds per project.
 2. Green main → build tagged images → push to registry.
-3. Deploy: `docker compose pull && docker compose up -d` (VM) — rolling by
+3. Deploy: `docker compose pull && docker compose up -d` (VM) - rolling by
    service; each container's HEALTHCHECK gates traffic at the proxy.
 4. Rollback = redeploy previous tag; state lives in volumes, not images.
 
@@ -50,7 +50,7 @@ Docker: per-project Dockerfiles (already present: slim base, cached deps
 layer, HEALTHCHECK, key via runtime env). `docker-compose.yml` at root runs
 all three on :8001–:8003.
 
-Kubernetes readiness — required changes before it makes sense, per service:
+Kubernetes readiness - required changes before it makes sense, per service:
 - **rag**: stateless apart from logs → ship logs to stdout collector; then
   N replicas trivially. Readiness = `/health`.
 - **agent**: move run execution to a queue (Redis + worker deployment);
@@ -70,7 +70,7 @@ Then: HPA on CPU for rag/pipeline, KEDA on queue depth for agent workers.
 - **Domain metrics that matter more than CPU**: P1 abstention_rate (spike =
   retrieval/corpus regression), P2 completion_rate and budget_exceeded rate
   (spike = runaway plans or price change), P3 quality_score per run
-  (drop = upstream source drift — this is the pipeline's whole point).
+  (drop = upstream source drift - this is the pipeline's whole point).
 - **Alerts**: p95 latency > 2× baseline; P1 abstention_rate > 0.25;
   P2 completion_rate < 0.8 or est cost/hour > budget; P3 quality_score < 0.75
   (mirrors the pytest gate) or any new reject_reason key.
